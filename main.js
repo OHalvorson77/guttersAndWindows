@@ -13,10 +13,10 @@ const publicPath = path.join(__dirname, 'public');
 const PORT=3000;
 const mySQL= require('mysql2');
 const database=mySQL.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Hockey@2003",
-    database: "guttersandwindows",
+    host: "biysp698lf02ifc33psv-mysql.services.clever-cloud.com",
+    user: "usubfdp3tmpv1jbv",
+    password: "OSuig9sfWxfA452kroPh",
+    database: "biysp698lf02ifc33psv",
     port: 3306
 });
 
