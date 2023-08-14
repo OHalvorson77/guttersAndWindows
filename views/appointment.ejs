@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request an Appointment with Westend Windows and Gutters</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-image:url('https://th.bing.com/th/id/R.c5103f9b58317e1f3f682b411f1c18a7?rik=w5uWfx%2bndTkIgg&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-position: center;
+  }
+  h1 {
+    text-align: center;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('skyPic.jpg');
+            background-size: cover;
+            background-position: center;
+  }
+  .form-container {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  .schedule-container {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  #returnHomeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px;
+  }
+</style>
+</head>
+<body>
+  <button id="returnHomeButton">Return to Home</button>
+  <h1>Appointment Scheduler</h1>
+  <div class="container">
+    <div class="form-container">
+      <h2>Schedule an Appointment</h2>
+      <form id="appointmentForm" action="/submit" method="POST">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required><br><br>
+        <label for="startTime">Start Time:</label>
+        <input type="time" id="startTime" name="startTime" required><br><br>
+        <label for="endTime">End Time:</label>
+        <input type="time" id="endTime" name="endTime" required><br><br>
+        <label for="name">Product ID:</label>
+        <select id="productID" name="productID" required>
+          <option value="1">Exterior Window Cleaning</option>
+          <option value="2">Interior Window Cleaning</option>
+          <option value="3">Exterior and Interior Cleaning/option>
+          <option value="4">Gutter Cleaning</option>
+          <option value="5">Screen Cleaning</option>
+        </select><br><br>
+        <label for="address">House Address:</label>
+        <input type="text" id="address" name="address" required><br><br>
+        <label for="emailAddress">Email Address:</label>
+        <input type="text" id="emailAddress" name="emailAddress" required><br><br>
+        <button type="submit">Schedule Appointment</button>
+        
+      </form>
+    </div>
+    <div class="schedule-container">
+      <h2>Upcoming Appointments</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>StartTime</th>
+            <th>EndTime</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody id="appointmentTableBody">
+          <!-- Appointments will be added dynamically here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Function to fetch and display appointments
+    function fetchAppointments() {
+      fetch('/api/appointments')
+        .then(response => response.json())
+        .then(appointments => {
+          const appointmentTableBody = document.getElementById('appointmentTableBody');
+          appointmentTableBody.innerHTML = '';
+
+          appointments.forEach(appointment => {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+            <td>${new Date(appointment.appointmentDay).toLocaleDateString()}</td>
+              <td>${appointment.startTime}</td>
+              <td>${appointment.endTime}</td>
+              <td>${appointment.name}</td>
+          
+            `;
+            appointmentTableBody.appendChild(newRow);
+          });
+        })
+        .catch(error => console.error('Error fetching appointments:', error));
+    }
+
+    // Fetch appointments when the page loads
+    window.addEventListener('load', fetchAppointments);
+
+    const returnHomeButton = document.getElementById('returnHomeButton');
+    returnHomeButton.addEventListener('click', () => {
+      window.location.href = 'https://guttersandwindows.ca/'; // Change the URL as needed
+    });
+  </script>
+</body>
+</html>
