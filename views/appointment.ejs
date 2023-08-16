@@ -8,35 +8,45 @@
   body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 100px;
     background-image:url('https://th.bing.com/th/id/R.c5103f9b58317e1f3f682b411f1c18a7?rik=w5uWfx%2bndTkIgg&pid=ImgRaw&r=0');
-            background-size: cover;
-            background-position: center;
+    background-size: cover;
+    background-position: center;
   }
   h1 {
     text-align: center;
   }
   .container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* Align forms to the top */
     background-image: url('skyPic.jpg');
-            background-size: cover;
-            background-position: center;
+    background-size: cover;
+    background-position: center;
   }
-  .form-container {
-    margin-bottom: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
+
   .schedule-container {
-    width: 100%;
+    flex: 1; /* Take up available space */
+    margin-right: 20px;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #d4ddfa;
+    opacity: 0.8;
+  }
+  .appointment-container {
+    /* Take up available space */
+    margin-right: 20px;
     padding: 20px;
-    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
+  .review-container {
+     /* Take up available space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
   }
   table {
     width: 100%;
@@ -54,13 +64,29 @@
     right: 0;
     margin: 20px;
   }
+  .star-rating {
+    display: inline-block;
+    font-size: 24px;
+    cursor: pointer;
+    color: rgb(211, 210, 203);
+  }
+
+  .star-rating:hover,
+  .star-rating:hover ~ .star-rating{
+    color: rgb(228, 227, 225);
+  }
+
+  .star-rating.selected {
+    color: gold;
+  }
 </style>
 </head>
 <body>
   <button id="returnHomeButton">Return to Home</button>
   <h1>Request an Appointment with Westend Windows and Gutters</h1>
   <div class="container">
-    <div class="form-container">
+  
+    <div class="appointment-container">
       <h2>Schedule an Appointment</h2>
       <form id="appointmentForm" action="/submit" method="POST">
         <label for="date">Date:</label>
@@ -85,6 +111,7 @@
         
       </form>
     </div>
+    
     <div class="schedule-container">
       <h2>Upcoming Appointments</h2>
       <table>
@@ -132,8 +159,10 @@
 
     const returnHomeButton = document.getElementById('returnHomeButton');
     returnHomeButton.addEventListener('click', () => {
-      window.location.href = 'https://guttersandwindows.ca/'; // Change the URL as needed
+      window.location.href = 'https://guttersandwindows.ca/'; 
     });
   </script>
+
+
 </body>
 </html>

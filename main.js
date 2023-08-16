@@ -98,8 +98,8 @@ app.post('/submit', (req, res) => {
   
       const mailOptions = {
         from: 'windowsandguttersautomated@gmail.com',
-        to: 'owenhalvie@gmail.com',
-        subject: 'Appointment Confirmation',
+        to: 'guttersandwindows@yahoo.com',
+        subject: 'Appointment Request',
         text: `
         <p>Your appointment details:</p>
         <p>Date: ${date}</p>
@@ -107,6 +107,7 @@ app.post('/submit', (req, res) => {
         <p>End Time: ${endTime}</p>
         <p>Address: ${address}</p>
         <p>clientID: ${randomClientID}</p>
+        <p>Email: ${emailAddress}</p>
        
         
         
